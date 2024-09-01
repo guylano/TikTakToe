@@ -32,6 +32,7 @@ int main(){
             break;
         }
     }
+    printBoard();
     printWinner(winner);
     return 0;
 }
@@ -92,6 +93,7 @@ void playerMove(){
 }
 
 void computerMove(){
+    //randomise x and y of computer placements
     srand(time(0));
     int x;  
     int y;
@@ -102,12 +104,10 @@ void computerMove(){
           x = rand() % 3;
           y = rand() % 3;
         } while (board[x][y] != ' ');
-        
         board[x][y] = COMPUTER;
     }else{
         printWinner(' ');
     }
-
 }
 
 char checkWinner(){
@@ -130,17 +130,18 @@ char checkWinner(){
       board[0][2] == board[1][1] && board[1][1] == board[2][0]){
         return(board[1][1]);
     }
-
     return ' ';
 }
 
 void printWinner(char winner){
+    //if there is a winner print it else its a tie
     if(winner == ' '){
         printf("its a tie");
+    }else if(winner == PLAYER){
+        printf("Congratulations you are the winner playing as %c", winner);
     }else{
-        printf("the winner is %c", winner);
+        printf("Better luck next time! Computer won as %c", winner);
     }
-    
 }
 
 
